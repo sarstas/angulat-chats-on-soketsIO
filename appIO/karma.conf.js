@@ -25,7 +25,7 @@ module.exports = function (config) {
       suppressAll: true // removes the duplicated traces
     },
     coverageReporter: {
-      dir: require('path').join(__dirname, './coverage/angulat-chats-on-soketsIO'),
+      dir: require('path').join(__dirname, './coverage/appIO'),
       subdir: '.',
       reporters: [
         { type: 'html' },
