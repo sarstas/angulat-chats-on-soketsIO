@@ -1,4 +1,17 @@
-<form id="form" [formGroup]="checkoutForm" (ngSubmit)="onSubmit()">
-  <input id="input" required autocomplete="off" formControlName="message" />
-  <button type="submit">Send</button>
+<form
+  novalidate
+  id="form"
+  [formGroup]="checkoutForm"
+  (ngSubmit)="onSubmit()"
+>
+  <input
+    id="input"
+    name="message"
+    required
+    formControlName="message"
+  />
+  <button type="submit" [disabled]="!checkoutForm.valid" >Send</button>
 </form>
+
+
+

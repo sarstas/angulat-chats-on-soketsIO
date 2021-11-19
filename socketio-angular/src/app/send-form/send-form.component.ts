@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder} from "@angular/forms";
+import {FormBuilder, Validators} from "@angular/forms";
 
 import {SocketioService} from "../socketio.service";
 
@@ -11,7 +11,7 @@ import {SocketioService} from "../socketio.service";
 export class SendFormComponent implements OnInit {
 
   checkoutForm = this.formBuilder.group({
-    message: ''
+    message: ['', Validators.required]
   });
 
   constructor(
