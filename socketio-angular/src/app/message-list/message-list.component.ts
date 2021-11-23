@@ -25,10 +25,6 @@ export class MessageListComponent implements OnInit {
   outputMes() {
     this.socketService.acceptMessage().subscribe( x  => {
         this.messages.push({message: x});
-    }
-
-    )
+    })
   }
-
-
 }

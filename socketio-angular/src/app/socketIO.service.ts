@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { io } from 'socket.io-client';
 import {environment} from "../environments/environment";
-import {interval, map, Observable} from "rxjs";
+import {from, interval, map, Observable, of, take, timer} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
@@ -39,15 +39,21 @@ export class SocketIOService {
 }
 
 export class SocketIOServiceStub {
-  private _index = 0;
+  private _index = 1;
 
   public sendMessage(msg: string) {
-    //void
+    return msg
   }
 
   public acceptMessage(): Observable<string> {
+
     return interval(1000).pipe(
+      take(3),
       map( () => (this._index++).toString())
     );
   }
+
+
+
+
 }

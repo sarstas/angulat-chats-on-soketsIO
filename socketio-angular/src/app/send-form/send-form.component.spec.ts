@@ -20,8 +20,8 @@ describe('sendFormComponent', () => {
       declarations: [ SendFormComponent ],
       providers: [
         {
-        provide: SocketIOService,
-        useClass: SocketIOServiceStub
+          provide: SocketIOService,
+          useClass: SocketIOServiceStub
         }
       ],
     });
@@ -42,9 +42,15 @@ describe('sendFormComponent', () => {
     const spy = spyOn(socketIOService, 'sendMessage').and.callThrough();
     changeInput('Quick Brown fox');
     click(getButtonEl());
-
     expect(spy).toHaveBeenCalledWith('Quick Brown fox')
   });
+
+  it( "shouldn't, send message if input empty", () => {
+    const spy = spyOn(socketIOService, 'sendMessage').and.callThrough();
+    changeInput('');
+    click(getButtonEl());
+    expect(spy).not.toHaveBeenCalled();
+  })
 
 
   function getInputEl():HTMLInputElement {
@@ -59,7 +65,6 @@ describe('sendFormComponent', () => {
     const input: HTMLInputElement = getInputEl();
     input.value = value;
     input.dispatchEvent(new Event('input'))
-
     fixture.detectChanges();
   }
 });

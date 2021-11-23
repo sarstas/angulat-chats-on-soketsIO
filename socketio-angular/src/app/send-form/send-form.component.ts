@@ -23,8 +23,6 @@ export class SendFormComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.info(this.checkoutForm.value)
-
     this.socketService.sendMessage(this.checkoutForm.value.message);
     this.checkoutForm.reset();
   }
