@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, Validators} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
-import {SocketioService} from "../socketio.service";
+import {SocketIOService} from "../socketIO.service";
 
 @Component({
   selector: 'app-send-form',
@@ -9,23 +9,24 @@ import {SocketioService} from "../socketio.service";
   styleUrls: ['./send-form.component.scss']
 })
 export class SendFormComponent implements OnInit {
-
-  checkoutForm = this.formBuilder.group({
-    message: ['', Validators.required]
-  });
+  public checkoutForm: FormGroup
 
   constructor(
-    private formBuilder: FormBuilder,
-    private socketService: SocketioService
-  ) { }
+    private _formBuilder: FormBuilder,
+    private socketService: SocketIOService
+  ) {}
 
-  ngOnInit(): void {
-
+  public ngOnInit(): void {
+    this.checkoutForm = this._formBuilder.group({
+        message: ['', Validators.required]
+      })
   }
 
   onSubmit(): void {
+    console.info(this.checkoutForm.value)
+
     this.socketService.sendMessage(this.checkoutForm.value.message);
     this.checkoutForm.reset();
   }
-
 }
+

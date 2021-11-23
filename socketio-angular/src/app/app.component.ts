@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from "@angular/forms";
 
-import {SocketioService} from "./socketio.service";
+import {SocketIOService} from "./socketIO.service";
 
 @Component({
   selector: 'app-root',
@@ -17,14 +17,13 @@ export class AppComponent implements OnInit  {
   });
 
   constructor(
-    private socketService: SocketioService,
+    private socketService: SocketIOService,
     private formBuilder: FormBuilder
   ) {}
 
   ngOnInit() {
     this.socketService.setupSocketConnection();
   }
-
 
   ngOnDestroy() {
     this.socketService.disconnect();

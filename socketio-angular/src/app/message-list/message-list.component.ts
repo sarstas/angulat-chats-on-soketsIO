@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {SocketioService} from "../socketio.service";
+import {SocketIOService} from "../socketIO.service";
 
 interface Message {
   message: string
@@ -15,7 +15,7 @@ export class MessageListComponent implements OnInit {
   messages: Message[] = [];
 
   constructor(
-    private socketService: SocketioService,
+    private socketService: SocketIOService,
   ) { }
 
   ngOnInit(): void {

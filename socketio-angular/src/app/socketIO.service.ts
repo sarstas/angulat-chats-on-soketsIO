@@ -1,17 +1,17 @@
 import { Injectable } from '@angular/core';
 import { io } from 'socket.io-client';
 import {environment} from "../environments/environment";
-import {Observable} from "rxjs";
+import {interval, map, Observable} from "rxjs";
 
 @Injectable({
   providedIn: 'root'
 })
-export class SocketioService {
+export class SocketIOService {
 
   socket: any;
 
   constructor() {
-
+    this.socket = io();
   }
 
   setupSocketConnection() {
@@ -32,8 +32,22 @@ export class SocketioService {
     return new Observable(subscriber => {
       this.socket.on('my broadcast', (data: string) => {
         subscriber.next(data);
-        console.log(data);
       });
     })
+  }
+
+}
+
+export class SocketIOServiceStub {
+  private _index = 0;
+
+  public sendMessage(msg: string) {
+    //void
+  }
+
+  public acceptMessage(): Observable<string> {
+    return interval(1000).pipe(
+      map( () => (this._index++).toString())
+    );
   }
 }
